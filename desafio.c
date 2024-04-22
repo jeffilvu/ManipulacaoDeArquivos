@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include    <stdlib.h>
+
 char produto1[20], produto2[20], produto3[20];
 int qtd1, qtd2, qtd3,opcao=0;
 
@@ -36,15 +37,17 @@ void cria_arquivo()
     fclose(arquivo);
 
 }
-
 void carrega_dados() 
 {
     FILE *arquivo = fopen("dados.txt", "rb");
 
     if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo %s.\n", "dados.txt");
-        exit(1);
+        printf("Arquivo %s não encontrado. Criando um novo arquivo.\n", "dados.txt");
+        cria_arquivo();
     }
+        
+
+        arquivo = fopen("dados.txt", "rb"); // Tenta abrir novamente
 
     fread(produto1, sizeof(char), 20, arquivo);
     fread(&qtd1, sizeof(int), 1, arquivo);
@@ -55,7 +58,6 @@ void carrega_dados()
 
     fclose(arquivo);
 }
-
 void entrada_dados()
 {
  
@@ -76,7 +78,6 @@ void entrada_dados()
     cria_arquivo();
  
 }
- 
 void listar_produtos()
 {
     printf("Produto:%s | Quantidade: %d\n",produto1,qtd1);
@@ -108,6 +109,7 @@ void pesquisa_nome_inteiro()
  
 }
 void pesquisa_primeira_letra()
+
 {
     char letra_recebida;
     printf("Digite a Letra: ");
@@ -132,7 +134,6 @@ void pesquisa_primeira_letra()
     }
  
 }
- 
 void altera_dados()
 {
     char produto_recebido[20];
@@ -153,7 +154,7 @@ void altera_dados()
     }
     else if(compara_palavras(produto_recebido, produto2) == 0)
     {
-        printf("Produto:%s | Quantidade:%d", produto2, qtd2);
+        printf("Produto:%s | Quantidade:%d\n", produto2, qtd2);
  
  
         printf("Novo nome:\n ");
@@ -164,7 +165,7 @@ void altera_dados()
     }
     else if(compara_palavras(produto_recebido, produto3) == 0)
     {
-        printf("Produto:%s | Quantidade:%d", produto3, qtd3);
+        printf("Produto:%s | Quantidade:%d\n", produto3, qtd3);
         printf("Novo nome:\n ");
         scanf("%s",produto3);
  
@@ -177,8 +178,6 @@ void altera_dados()
     }
     cria_arquivo();
 }
- 
- 
 void exclui_dados()
 {
     int cont=0;
@@ -211,14 +210,12 @@ void exclui_dados()
         printf("Produto não encontrado!\n");
     }
     cria_arquivo();
-}
- 
+} 
 int main()
 {
     carrega_dados();
     while (1)
     {
- 
         printf("\nEscolha uma opcao do menu: \n");
         printf("[1] - Inserir produtos \n");
         printf("[2] - Listar produtos \n");
