@@ -1,5 +1,7 @@
 #include <stdio.h>
-#include    <stdlib.h>
+#include <stdlib.h>
+
+/*Este código em C implementa um sistema básico de gerenciamento de produtos que permite adicionar, listar, pesquisar, alterar e excluir informações sobre até três produtos.*/
 
 char produto1[20], produto2[20], produto3[20];
 int qtd1, qtd2, qtd3,opcao=0;
